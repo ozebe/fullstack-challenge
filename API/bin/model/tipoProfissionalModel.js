@@ -16,7 +16,7 @@ exports.saveTipoProfissional = function(tipoProfissional){
 };
 
 exports.updateTipoProfissional = function(id, tipoProfissional){
-    return database.query('update fullstackChallenge.tipoProfissional set descricao = $1, situacao = $2 where id = $3 returning *', [tipoProfissional.descricao, tipoProfissional.situacao, id]);
+    return database.query('update fullstackChallenge.tipoProfissional set descricao = $1, situacao = $2, updatedAt = current_timestamp where id = $3 returning *', [tipoProfissional.descricao, tipoProfissional.situacao, id]);
 }
 
 exports.deleteTipoProfissional = function(id){
