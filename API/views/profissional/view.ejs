@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+</head>
+<body>
+    <%- include('../partials/navbar'); %>
+    <div class="container-fluid">
+        <h1><%= title %></h1>
+        <div class="col-sm-8 ">
+            <% if(message) { %>
+                <div class="alert <%= type %>" role="alert">
+                    <%= message %>
+                  </div>
+            <%}%>
+            <table class="table table-striped">
+                <% if(data) { %>
+                    <tr>
+                        <th>ID</th>
+                        <td><%= data.id %></td>
+                    </tr>
+                    <tr>
+                        <th>Nome</th>
+                        <td><%= data.nome %></td>
+                    </tr>
+                    <tr>
+                        <th>Telefone</th>
+                        <td><%= data.telefone %></td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td><%= data.email %></td>
+                    </tr>
+                    <tr>
+                        <th>Tipo de profissional</th>
+                        <td><%= data.tipoprofissional[0].descricao%></td>
+                    </tr>
+                    <tr>
+                        <th>Data de inserção</th>
+                        <td><%= data.createdat.toLocaleString()%></td>
+                    </tr>
+                    <tr>
+                        <th>Última data de edição</th>
+                        <td><%= data.updatedat.toLocaleString()%></td>
+                    </tr>
+                    <tr>
+                        <th>Situação</th>
+                        <td>
+                            <% if(data.situacao == true){ %>
+                                <p class="text-success">Ativo</p>
+                            <% }else{ %>
+                                <p class="text-danger">Desativado</p>
+                            <%} %>
+                        </td>
+                    </tr>
+                <%}%>
+              </table>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/javascripts/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="/javascripts/mask.js"></script>
+<script src="/javascripts/bootstrap.bundle.min.js"></script>

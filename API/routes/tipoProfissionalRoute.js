@@ -8,7 +8,10 @@ const tipoProfissionalController = require('../bin/controller/tipoProfissionalCo
 
 router.get('/tipoProfissional', async function(req, res){
     const tipoProfissional = await tipoProfissionalController.getTipoProfissional();
-    res.json(tipoProfissional.rows);
+    //res.json(tipoProfissional.rows);
+
+    //renderiza a pagina de visualização de todos os profissionais.
+    res.render('./tipoProfissional/index', { title: 'Todos os tipos cadastrados', data: tipoProfissional.rows, message: null, type: 'alert-success'});
 });
 
 router.get('/tipoProfissional/:id', async function(req, res){

@@ -25,7 +25,15 @@ router.get('/profissional/add', async function(req, res, next){
 
 router.get('/profissional/:id', async function(req, res){
     const profissional = await profissionalController.getProfissionalById(req.params.id);
-    res.json(profissional.rows);
+
+    //se a busca pelo profissional retornou, e retornou >0 resultados.
+    if(profissional != null && profissional.rowCount && profissional.rowCount > 0){
+        res.render('./profissional/view', { title: 'Visualizar profissional', data: profissional.rows[0], message: null, type: null});
+
+    }else{
+        res.render('./profissional/view', { title: 'Visualizar profissional', data: null, message: 'Erro ao carregar profissional', type: 'alert-danger'});
+
+    }
 });
 
 router.post('/profissional', async function(req, res){
