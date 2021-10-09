@@ -3,12 +3,30 @@ Model do Profissional
 */
 const database = require('../config/database');
 
-exports.getProfissional = function(){
-    return database.query("select * from fullstackChallenge.profissional order by fullstackChallenge.profissional.nome");
+const tipoProfissionalModel = require('../model/tipoProfissionalModel');
+
+exports.getProfissional = async function(){
+    let profissional = await database.query("select * from fullstackChallenge.profissional order by fullstackChallenge.profissional.nome");
+    let tipoProfissional = await tipoProfissionalModel.getTipoProfissional();
+
+    //itera no vetor de profissionais e adicionar as propriedades do tipo de profissão
+    for(let p of profissional.rows){
+        for(tp of tipoProfissional.rows){
+            if(p.tipoprofissional == tp.id){
+                p.tipoprofissional = tp
+            }
+        }
+    }
+    return profissional;
 }
 
-exports.getProfissionalById = function(id){
-    return database.query("select * from fullstackChallenge.profissional where id = $1", [id]);
+exports.getProfissionalById = async function(id){
+    let profissional = await database.query("select * from fullstackChallenge.profissional where id = $1", [id]);
+    let tipoProfissional = await tipoProfissionalModel.getTipoProfissionalById(profissional.rows[0].tipoprofissional);
+    profissional.rows[0].tipoprofissional = tipoProfissional.rows;
+
+    return profissional;
+    //return database.query("select * from fullstackChallenge.profissional where id = $1", [id]);
 }
 
 exports.saveProfissional = function(profissional){
