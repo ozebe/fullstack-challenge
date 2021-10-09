@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -10,6 +11,14 @@ var profissionalRoute = require('./routes/profissionalRoute');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use((req, res, next) =>{
+  res.header("Access-Control-Allow-Origin", "*"); //só deixa um ip especifico para origem
+  res.header("Access-Control-Allow-Headers", ['Content-Type', 'Access-Control-Allow-Headers', 'X-Requested-With']);
+  res.header("Access-Control-Allow-Methods", ['GET', 'PUT', 'POST', 'DELETE']);
+  app.use(cors());
+  next();
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
