@@ -8,9 +8,15 @@
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
 </head>
 <body>
+  <%- include('../partials/navbar'); %>
     <div class="container-fluid">
         <h1><%= title %></h1>
         <div class="col-sm-8 ">
+          <% if(message) { %>
+            <div class="alert <%= type %>" role="alert">
+              <%= message %>
+            </div>
+          <%}%>
             <a class="btn btn-primary" href="/profissional/add" role="button">Inserir novo profissional</a>
 
             <table class="table table-striped">
@@ -19,6 +25,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Telefone</th>
                     <th scope="col">Profissão</th>
                     <th scope="col">Opções</th>
                   </tr>
@@ -37,10 +44,14 @@
                              <%= data[i].email%>
                           </td>
                           <td>
+                            <%= data[i].telefone%>
+                         </td>
+                          <td>
                             <%= data[i].tipoprofissional.descricao%>
                          </td>
                          <td>
                             <a class="btn btn-primary" href="/profissional/<%= data[i].id%>" role="button">Visualizar</a>
+                            <a class="btn btn-warning" href="/profissional/edit/<%= data[i].id%>" role="button">Editar</a>
                             <a class="btn btn-danger" href="/profissional/delete/<%= data[i].id%>" role="button">Excluir</a>
                         </td>
                        </tr>
