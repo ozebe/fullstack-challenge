@@ -18,7 +18,7 @@ create table fullstackChallenge.tipoProfissional(
 create table fullstackChallenge.profissional(
 	id serial not null,
 	nome varchar(255) not null,
-	telefone varchar(25) not null,
+	telefone varchar(25) not null unique,
 	email varchar(255) not null unique,
 	tipoProfissional integer not null,
 	situacao boolean not null,
