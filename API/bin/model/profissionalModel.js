@@ -30,7 +30,11 @@ exports.getProfissionalById = async function(id){
 }
 
 exports.saveProfissional = function(profissional){
-    return database.query('insert into fullstackChallenge.profissional (nome, telefone, email, tipoprofissional, situacao, updatedAt, createdAt) values ($1, $2, $3, $4, $5, current_timestamp, current_timestamp) returning *', [profissional.nome, profissional.telefone, profissional.email, profissional.tipoprofissional, profissional.situacao]);
+    //tenta salvar o profissional, caso ocorra um erro, devolve o erro na solicitação, para ser tratado.
+    const query =  database.query('insert into fullstackChallenge.profissional (nome, telefone, email, tipoprofissional, situacao, updatedAt, createdAt) values ($1, $2, $3, $4, $5, current_timestamp, current_timestamp) returning *', [profissional.nome, profissional.telefone, profissional.email, profissional.tipoprofissional, profissional.situacao]).catch(e => {
+        return(e);
+    });
+    return query;
 };
 
 exports.updateProfissional = function(id, profissional){
