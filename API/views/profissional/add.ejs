@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+</head>
+<body>
+    <div class="container-fluid">
+        <h1><%= title %></h1>
+        <div class="col-sm-8 ">
+              <form action="/profissional" method="POST">
+
+                <label for="nome">Nome completo</label>
+                <input class="form-control" type="text" placeholder="Nome" id="nome" name="nome" required>
+                <br>
+
+                <label for="nome">Telefone</label>
+                <input class="form-control" type="tel" placeholder="(xx) xxxx-xxxx" id="telefone" name="telefone" required>
+                <br>
+
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="nome@example.com" name="email" required>
+                <br>
+
+                <!--Seleção do tipo do profissional-->
+                <label for="tipoprofissional">Tipo profissional</label>
+                <select class="form-control" name="tipoprofissional" id="tipoprofissional">
+                    <%for(tp of data){ %>
+                        <option value="<%= tp.id %>"><%= tp.descricao %></option>
+                    <% } %>
+                </select>
+                <br>
+
+                <label for="situacao">Situação</label>
+                <select class="form-control" name="situacao" id="situacao">
+                    <option value="true">Ativo</option>
+                    <option value="false">Desativado</option>
+                </select>
+                <br>
+
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+              </form> 
+
+        </div>
+    </div>
+</body>
+</html>
+<script src="/javascripts/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script src="/javascripts/mask.js"></script>
+<script src="/javascripts/bootstrap.bundle.min.js"></script>

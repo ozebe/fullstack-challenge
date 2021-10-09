@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+</head>
+<body>
+    <div class="container-fluid">
+        <h1><%= title %></h1>
+        <div class="col-sm-8 ">
+            <a class="btn btn-primary" href="/profissional/add" role="button">Inserir novo profissional</a>
+
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Profissão</th>
+                    <th scope="col">Opções</th>
+                  </tr>
+                </thead>
+                <tbody class="table-profissional">
+                    <% if(data.length > 0){ %>
+                       <% for ( var i = 0 ; i < data.length ; i++){ %>
+                       <tr>
+                        <td>
+                            <%= data[i].id%>
+                         </td>
+                          <td>
+                             <%= data[i].nome%>
+                          </td>
+                          <td>
+                             <%= data[i].email%>
+                          </td>
+                          <td>
+                            <%= data[i].tipoprofissional.descricao%>
+                         </td>
+                         <td>
+                            <a class="btn btn-primary" href="/profissional/<%= data[i].id%>" role="button">Visualizar</a>
+                            <a class="btn btn-danger" href="/profissional/delete/<%= data[i].id%>" role="button">Excluir</a>
+                        </td>
+                       </tr>
+                       <% } %>
+                    <% } %>
+                  </tbody>
+        
+              </table>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/javascripts/bootstrap.bundle.min.js"></script>
