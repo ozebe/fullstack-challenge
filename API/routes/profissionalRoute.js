@@ -5,8 +5,10 @@ Routes do rofissional
 const express = require('express');
 const router = express.Router();
 const profissionalController = require('../bin/controller/profissionalController');
+const tipoProfissionalController = require('../bin/controller/tipoProfissionalController');
 
-router.get('/profissional', async function(req, res){
+//quando ocorrer uma solicitação GET para encontrar todos os profissionais.
+router.get('/profissional', async function(req, res, next){
     const profissional = await profissionalController.getProfissional();
     res.json(profissional.rows);
 });
@@ -19,7 +21,16 @@ router.get('/profissional/:id', async function(req, res){
 router.post('/profissional', async function(req, res){
     const profissional = req.body;
     const newProfissional = await profissionalController.saveProfissional(profissional);
-    res.json(newProfissional);
+    const tipoProfissional = await tipoProfissionalController.getTipoProfissional(); //tipos de profissionais
+    
+    //se ao tentar inserir o profissional, retornar um erro.
+    if(newProfissional.code){
+        res.json(newProfissional);
+    //se não ocorrer nenhum erro ao inserir o novo profissional.
+    }else{
+        //devolve as informações do cadastro realizado.
+        res.json(newProfissional.rows);
+    }
 });
 
 router.put('/profissional/:id', async function(req, res){
