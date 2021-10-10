@@ -20,13 +20,19 @@ exports.getProfissional = async function(){
     return profissional;
 }
 
+//ao tentar buscar o profissional pelo id, verifica se retornou algo e vincula ao tipo do profissional.
 exports.getProfissionalById = async function(id){
     let profissional = await database.query("select * from fullstackChallenge.profissional where id = $1", [id]);
+
+    if(profissional.rowCount > 0){
     let tipoProfissional = await tipoProfissionalModel.getTipoProfissionalById(profissional.rows[0].tipoprofissional);
     profissional.rows[0].tipoprofissional = tipoProfissional.rows;
-
     return profissional;
-    //return database.query("select * from fullstackChallenge.profissional where id = $1", [id]);
+
+    }else{
+        return profissional;
+    }
+
 }
 
 exports.saveProfissional = function(profissional){
