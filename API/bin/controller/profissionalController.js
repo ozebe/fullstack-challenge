@@ -10,7 +10,14 @@ exports.getProfissional = function(){
 }
 
 exports.getProfissionalById = function(id){
-    return profissionalModel.getProfissionalById(id);
+    //se ao buscar o profissinal pelo ID, não for repassado um número, retorna null.
+    const profissionalId = parseInt(id);
+    if(isNaN(profissionalId)){
+        return null;
+    }else{
+        return profissionalModel.getProfissionalById(profissionalId);
+
+    }
 }
 
 exports.saveProfissional = function(profissional){
